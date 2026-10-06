@@ -86,7 +86,7 @@
         
         <div class="relative z-10 max-w-5xl mx-auto space-y-8 py-20">
             <div class="inline-flex items-center gap-2 bg-gold-500/10 border border-gold-500/30 text-gold-400 px-5 py-2 rounded-full text-xs font-semibold tracking-widest uppercase backdrop-blur-md">
-                <i class="fa-solid fa-crown text-xs"></i> Cultural Heritage Landmark & Luxury Asset
+                <i class="fa-solid fa-crown text-xs"></i> Cultural Heritage Landmark & Valuable Asset
             </div>
             
             <h1 class="text-4xl sm:text-6xl lg:text-7xl font-serif font-extrabold text-white leading-tight tracking-tight">
@@ -257,7 +257,7 @@
         <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
             <span class="text-gold-500 font-semibold uppercase tracking-widest text-xs">Financial Modeling</span>
             <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white">Interactive Investment Yield Calculator</h2>
-            <p class="text-slate-400">Simulate rental revenue scenarios based on market rental rates per square meter.</p>
+            <p class="text-slate-400">Simulate gross rental revenue scenarios based on market rental rates per square meter.</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 bg-dark-800 border border-slate-800 rounded-3xl p-8 lg:p-12 gold-border-glow">
@@ -265,13 +265,13 @@
                 <div>
                     <label class="flex justify-between text-sm font-semibold text-white mb-3">
                         <span>Estimated Rental Rate per m² / month:</span>
-                        <span class="text-gold-400 font-bold text-lg">$<span id="rateValue">22</span> / m²</span>
+                        <span class="text-gold-400 font-bold text-lg">$<span id="rateValue">10.5</span> / m²</span>
                     </label>
-                    <input type="range" id="rateSlider" min="15" max="35" value="22" step="1" 
+                    <input type="range" id="rateSlider" min="10.5" max="35" value="10.5" step="0.5" 
                            class="w-full h-3 bg-dark-900 rounded-lg appearance-none cursor-pointer accent-gold-500">
                     <div class="flex justify-between text-xs text-slate-500 mt-2">
-                        <span>$15 (Conservative)</span>
-                        <span>$25 (Market Avg)</span>
+                        <span>$10.5 (Base - $15,000/mo)</span>
+                        <span>$22 (Market Avg)</span>
                         <span>$35 (Prime HQ / Boutique)</span>
                     </div>
                 </div>
@@ -298,18 +298,18 @@
                 
                 <div class="space-y-6">
                     <div>
-                        <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Monthly Gross Revenue</div>
-                        <div class="text-3xl sm:text-4xl font-extrabold text-white">$<span id="monthlyRevenue">31,438</span></div>
+                        <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Monthly Gross Rent</div>
+                        <div class="text-3xl sm:text-4xl font-extrabold text-white">$<span id="monthlyRevenue">15,004</span></div>
                     </div>
 
                     <div>
                         <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Annual Gross Income (NOI)</div>
-                        <div class="text-3xl sm:text-4xl font-extrabold text-gold-400">$<span id="annualRevenue">377,256</span></div>
+                        <div class="text-3xl sm:text-4xl font-extrabold text-gold-400">$<span id="annualRevenue">180,054</span></div>
                     </div>
 
                     <div>
                         <div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Estimated Gross ROI / Yield</div>
-                        <div class="text-3xl sm:text-4xl font-extrabold text-emerald-400"><span id="yieldRate">12.58</span>%</div>
+                        <div class="text-3xl sm:text-4xl font-extrabold text-emerald-400"><span id="yieldRate">6.00</span>%</div>
                     </div>
                 </div>
 
@@ -357,7 +357,7 @@
         </div>
     </section>
 
-    <!-- Property Gallery Section with Your Real Uploaded Photos -->
+    <!-- Property Gallery Section -->
     <section id="gallery" class="py-24 px-6 max-w-7xl mx-auto border-b border-slate-800/60">
         <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
             <span class="text-gold-500 font-semibold uppercase tracking-widest text-xs">Visual Tour</span>
@@ -484,14 +484,14 @@
 
         function calculateROI() {
             const rate = parseFloat(rateSlider.value);
-            rateValue.textContent = rate;
+            rateValue.textContent = rate.toFixed(1);
 
             const monthly = rate * TOTAL_AREA;
             const annual = monthly * 12;
             const yieldPct = (annual / PROPERTY_PRICE) * 100;
 
-            monthlyRevenue.textContent = monthly.toLocaleString('en-US');
-            annualRevenue.textContent = annual.toLocaleString('en-US');
+            monthlyRevenue.textContent = Math.round(monthly).toLocaleString('en-US');
+            annualRevenue.textContent = Math.round(annual).toLocaleString('en-US');
             yieldRate.textContent = yieldPct.toFixed(2);
         }
 
